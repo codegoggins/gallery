@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 import ImgCard from './ImgCard';
-
+import axios from "axios";
+import { useState , useEffect } from "react";
 
 const Container = styled.div`
 margin-top: 1rem;
@@ -51,13 +52,26 @@ const Data = [
 
 const Images = () => {
 
+    const [image, setImage] = useState([]);
+
+    const url = `https://api.unsplash.com/photos/?client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}&per_page=50`
+  
+    useEffect(()=>{
+      axios.get(url).then((response)=>{
+         setImage(response.data);
+        }).catch((err)=>{
+            console.log(err);
+        })
+    },[]);
+    
+    console.log(image);
 
   return (
       <Container>
          {  
-            Data.map(({id,link})=>(
-            <ImgGallery key={id}>
-                <ImgCard link={link}/>
+            image.map((item)=>(
+            <ImgGallery key={item.id}>
+                <ImgCard link={item.urls.full} user={item.user} likes={item.likes}/>
             </ImgGallery>
             ))
          }

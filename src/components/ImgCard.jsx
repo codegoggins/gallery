@@ -61,7 +61,7 @@ color:gray;
 `;
 
 
-const ImgCard = ({link}) => {
+const ImgCard = ({link,user,likes}) => {
   return (
     <Container>
         <Image src={link}/>
@@ -69,12 +69,12 @@ const ImgCard = ({link}) => {
              <User>
                  <UserImage src='https://images.pexels.com/photos/9833110/pexels-photo-9833110.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'/>
                  <UserDetails>
-                    <Name>Nilay</Name>
-                    <UserName>@codenilay</UserName>
+                    <Name>{user.name}</Name>
+                    <UserName>@{user.username}</UserName>
                 </UserDetails>
              </User>
              <Likes>
-                 <LikesCount>2.3k</LikesCount>
+                 <LikesCount>{likes}</LikesCount>
                  <ThumbUpIcon fontSize='medium'/>
              </Likes>
         </Details>
