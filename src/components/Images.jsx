@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import ImgCard from './ImgCard';
 
 
 const Container = styled.div`
@@ -11,11 +12,6 @@ column-width: 33%;
 
 const ImgGallery = styled.div``;
 
-const Image = styled.img`
-object-fit: cover;
-width: 100%;
-margin: 0.5rem;
-`;
 
 
 const Data = [
@@ -60,8 +56,8 @@ const Images = () => {
       <Container>
          {  
             Data.map(({id,link})=>(
-            <ImgGallery>
-                <Image key={id} src={link}/>
+            <ImgGallery key={id}>
+                <ImgCard link={link}/>
             </ImgGallery>
             ))
          }

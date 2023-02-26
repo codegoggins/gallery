@@ -7,10 +7,9 @@ function App() {
 
   return (
     <div className="App">
-       {/* <Navbar/> */}
-       {/* <Top/> */}
-       {/* <Images/> */}
-       <ImgCard/>
+       <Navbar/>
+       <Top/>
+       <Images/>
     </div>
   );
 }
