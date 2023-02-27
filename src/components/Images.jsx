@@ -28,21 +28,30 @@ const ImgGallery = styled.div``;
 
 const Images = () => {
 
-    // const text = useSelector((state) => state.text);
-
-    // console.log(text);
-
+    let text = useSelector((state) => state.text);
     const [image, setImage] = useState([]);
 
+    const searchURL = `https://api.unsplash.com/search/photos?page=1&query=${text}&per_page=50&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}` 
+
+
     const url = `https://api.unsplash.com/photos/?client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}&per_page=50&page=1`
-  
+
     useEffect(()=>{
-      axios.get(url).then((response)=>{
-         setImage(response.data);
-        }).catch((err)=>{
-            console.log(err);
-        })
-    },[url]);
+        setImage([]);
+        if(text === ''){
+        axios.get(url).then((response)=>{
+           setImage(response.data);
+          }).catch((err)=>{
+              console.log(err);
+          })
+        }else{
+          axios.get(searchURL).then((response)=>{
+            setImage(response.data.results);
+           }).catch((err)=>{
+               console.log(err);
+           })
+        }
+      },[url,text]);
     
 
   return (

@@ -9,7 +9,7 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 height: 3rem;
-padding: 2rem 0;
+padding: 2rem 1rem;
 
 @media(max-width:768px){
 padding: 2rem 0.5rem;
