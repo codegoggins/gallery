@@ -1,5 +1,4 @@
 import Images from "./components/Images";
-import ImgCard from "./components/ImgCard";
 import Navbar from "./components/Navbar";
 import Top from "./components/Top";
 

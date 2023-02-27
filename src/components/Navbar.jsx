@@ -1,6 +1,8 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
 import SearchIcon from '@mui/icons-material/Search';
+import { useDispatch } from 'react-redux';
+import { setTextValue } from '../redux/textSlice';
 
 const Container = styled.div`
 display: flex;
@@ -94,10 +96,11 @@ border: none;
 const Navbar = () => {
 
   const val = useRef(null);
+  const dispatch = useDispatch();
 
   const handleSearch = () => {
      const q = val.current.value;
-     console.log(q);
+     dispatch(setTextValue(q));
   }
 
   return (
