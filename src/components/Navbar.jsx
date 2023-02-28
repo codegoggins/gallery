@@ -8,12 +8,12 @@ const Container = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-between;
-height: 3rem;
+height: 8rem;
 padding: 2rem 1rem;
 
 @media(max-width:768px){
-padding: 2rem 0.5rem;
-justify-content: space-around;
+flex-direction: column;
+gap: 1rem;
 }
 
 @media(max-width:1000px){
@@ -34,15 +34,7 @@ const Logo = styled.h1`
 
 const Center = styled.div``;
 
-const Right = styled.div`
-display: flex;
-align-items: center;
-gap: 1rem;
-  @media(max-width:768px){
-    font-size: 0.5rem;
-    gap: 0.5rem;
-  }
-`;
+
 
 const Search = styled.div`
 display: flex;
@@ -57,7 +49,7 @@ padding: 0.4rem 8rem 0.4rem 0.3rem;
 border-radius: 0.3rem;
 
 @media(max-width:768px){
-padding: 0.4rem 2rem 0.4rem 0.3rem;
+padding: 0.4rem 1rem 0.4rem 0.3rem;
 }
 `;
 
@@ -103,6 +95,12 @@ const Navbar = () => {
      dispatch(setTextValue(q));
   }
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <Container>
         <Left>
@@ -113,16 +111,11 @@ const Navbar = () => {
                 <SearchIcon onClick={handleSearch}/>
                 <Input 
                 placeholder='Search'
+                onKeyDown={handleKeyDown}
                 ref={val}
                 />
             </Search>
         </Center>
-        <Right>
-            <Text>Dark Mode</Text>
-            <DarkMode>
-                <Circle/>
-            </DarkMode>
-        </Right>
     </Container>
   )
 }

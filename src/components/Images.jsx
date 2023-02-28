@@ -32,10 +32,10 @@ const Images = () => {
     let text = useSelector((state) => state.text);
     const [image, setImage] = useState([]);
 
-    const searchURL = `https://api.unsplash.com/search/photos?page=1&query=${text}&per_page=5&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}` 
+    const searchURL = `https://api.unsplash.com/search/photos?page=1&query=${text}&per_page=30&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}` 
 
 
-    const url = `https://api.unsplash.com/photos/?client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}&per_page=5&page=1`
+    const url = `https://api.unsplash.com/photos/?client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}&per_page=30&page=1`
 
     useEffect(()=>{
         setImage([]);
