@@ -6,26 +6,6 @@ import { useState , useEffect } from "react";
 import { useSelector } from 'react-redux';
 import Modal from './Modal';
 
-const Container = styled.div`
-margin-top: 1rem;
-column-count: 3;
-column-width: 33%;
-
-@media(max-width:1000px){
-  column-count:2;
-  column-width:50%;
-}
-
-@media(max-width:768px){
-  column-count:1;
-  column-width:100%;
-}
-
-
-`;
-
-const ImgGallery = styled.div``;
-
 
 const Images = () => {
 
@@ -86,3 +66,23 @@ const Images = () => {
 }
 
 export default Images
+
+const Container = styled.div`
+margin-top: 1rem;
+column-count: 3;
+column-width: 33%;
+
+@media(max-width:1000px){
+  column-count:2;
+  column-width:50%;
+}
+
+@media(max-width:768px){
+  column-count:1;
+  column-width:100%;
+}
+
+
+`;
+
+const ImgGallery = styled.div``;

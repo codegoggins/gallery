@@ -4,16 +4,58 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch } from 'react-redux';
 import { setTextValue } from '../redux/textSlice';
 
+
+const Navbar = () => {
+
+  const val = useRef(null);
+  const dispatch = useDispatch();
+
+  const handleSearch = () => {
+     const q = val.current.value;
+     dispatch(setTextValue(q));
+  }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  return (
+    <Container>
+        <Left>
+            <Logo>Image Gallery</Logo>
+        </Left>
+        <Center>
+            <Search>
+                <SearchIcon onClick={handleSearch}/>
+                <Input 
+                placeholder='Search'
+                onKeyDown={handleKeyDown}
+                ref={val}
+                />
+            </Search>
+        </Center>
+    </Container>
+  )
+}
+
+export default Navbar
+
+
+
+
 const Container = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-between;
-height: 8rem;
+height: 4rem;
 padding: 2rem 1rem;
 
 @media(max-width:768px){
 flex-direction: column;
 gap: 1rem;
+height: 8rem;
 }
 
 @media(max-width:1000px){
@@ -84,40 +126,3 @@ border: 1px solid gray;
 background-color: black;
 border: none;
 `;
-
-const Navbar = () => {
-
-  const val = useRef(null);
-  const dispatch = useDispatch();
-
-  const handleSearch = () => {
-     const q = val.current.value;
-     dispatch(setTextValue(q));
-  }
-
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleSearch();
-    }
-  };
-
-  return (
-    <Container>
-        <Left>
-            <Logo>Image Gallery</Logo>
-        </Left>
-        <Center>
-            <Search>
-                <SearchIcon onClick={handleSearch}/>
-                <Input 
-                placeholder='Search'
-                onKeyDown={handleKeyDown}
-                ref={val}
-                />
-            </Search>
-        </Center>
-    </Container>
-  )
-}
-
-export default Navbar

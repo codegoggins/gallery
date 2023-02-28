@@ -3,6 +3,48 @@ import styled from 'styled-components';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CloseIcon from '@mui/icons-material/Close';
 
+
+const Modal = ({isOpen,data,closeModal}) => {
+  
+  return (
+
+
+    <Container open={isOpen}>
+        <Image src={data.urls.full}/>
+        <Details>
+        <Close>
+            <CloseIcon fontSize='large' onClick={closeModal}/>
+        </Close>
+        <UserDetails>
+              <User>
+                  <UserImage src={data.user.profile_image.small}/>
+                 <UserInfo>
+                    <Name>{data.user.name}</Name>
+                    <UserName>{data.user.username}</UserName>
+                </UserInfo>
+             </User>
+             <Likes>
+                 <LikesCount>{data.likes}</LikesCount>
+                 <ThumbUpIcon fontSize='medium'/>
+             </Likes>
+        </UserDetails>
+        <ImageDesc>
+            <Desc>{data.description}</Desc>
+            <AltDesc>
+            {data.alt_description}
+            </AltDesc>
+            <UploadDate>
+              {new Date(data.created_at).toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'})}
+            </UploadDate>
+        </ImageDesc>
+        </Details>
+    </Container>
+  )
+}
+
+export default Modal
+
+
 const Container = styled.div`
 position:fixed;
 top: 0;
@@ -113,44 +155,3 @@ const AltDesc = styled.p``;
 const UploadDate = styled.p`
 color: grey;
 `;
-
-
-const Modal = ({isOpen,data,closeModal}) => {
-  
-  return (
-
-
-    <Container open={isOpen}>
-        <Image src={data.urls.full}/>
-        <Details>
-        <Close>
-            <CloseIcon fontSize='large' onClick={closeModal}/>
-        </Close>
-        <UserDetails>
-              <User>
-                  <UserImage src={data.user.profile_image.small}/>
-                 <UserInfo>
-                    <Name>{data.user.name}</Name>
-                    <UserName>{data.user.username}</UserName>
-                </UserInfo>
-             </User>
-             <Likes>
-                 <LikesCount>{data.likes}</LikesCount>
-                 <ThumbUpIcon fontSize='medium'/>
-             </Likes>
-        </UserDetails>
-        <ImageDesc>
-            <Desc>{data.description}</Desc>
-            <AltDesc>
-            {data.alt_description}
-            </AltDesc>
-            <UploadDate>
-              {new Date(data.created_at).toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'})}
-            </UploadDate>
-        </ImageDesc>
-        </Details>
-    </Container>
-  )
-}
-
-export default Modal
