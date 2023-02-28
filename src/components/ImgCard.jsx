@@ -9,7 +9,7 @@ const ImgCard = ({link,user,likes,onClick}) => {
         <Image src={link}/>
         <Details>
              <User>
-                 <UserImage src='https://images.pexels.com/photos/9833110/pexels-photo-9833110.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'/>
+                 <UserImage src={user.profile_image.small}/>
                  <UserDetails>
                     <Name>{user.name}</Name>
                     <UserName>@{user.username}</UserName>
