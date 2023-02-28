@@ -1,16 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CloseIcon from '@mui/icons-material/Close';
 
 const Container = styled.div`
+position:fixed;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
 height:95vh;
 border: 1px solid lightgrey;
 border-radius: 0.5rem;
 overflow: hidden;
+display:${props => props.open ? 'flex' : 'none'};
 margin: 1rem;
-display: flex;
 align-items: center;
+background: white;
+z-index: 10;
+
+ @media(max-width:940px){
+    flex-direction: column;
+ }
 `;
 
 const Image = styled.img`
@@ -18,6 +29,11 @@ flex: 1;
 object-fit: cover;
 width: 100%;
 height:100%;
+
+@media(max-width:940px){
+height:50%;
+ }
+
 `;
 
 
@@ -28,6 +44,7 @@ flex-direction: column;
 gap: 2rem;
 padding: 1rem;
 align-items: flex-start;
+width: 100%;
 `;
 
 const User = styled.div`
@@ -72,7 +89,7 @@ const UserName = styled.p`
 color:gray;
 `;
 
-const ImageDesc = styled.p`
+const ImageDesc = styled.div`
 display: flex;
 flex-direction: column;
 gap: 1rem;
@@ -80,39 +97,56 @@ gap: 1rem;
 
 const Close = styled.div`
 position: absolute;
+cursor: pointer;
 top: 2rem;
 right: 2rem;
+
+@media(max-width:940px){
+top: 2rem;
+right: 1rem;
+}
+
 `;
 
-const Modal = ({link,user,likes}) => {
+const Desc = styled.p``;
+const AltDesc = styled.p``;
+const UploadDate = styled.p`
+color: grey;
+`;
+
+
+const Modal = ({isOpen,data,closeModal}) => {
+  
   return (
-    <Container>
-        <Close>
-            <CloseIcon fontSize='large'/>
-        </Close>
-        <Image src='https://images.pexels.com/photos/14454924/pexels-photo-14454924.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'/>
+
+
+    <Container open={isOpen}>
+        <Image src={data.urls.full}/>
         <Details>
+        <Close>
+            <CloseIcon fontSize='large' onClick={closeModal}/>
+        </Close>
         <UserDetails>
               <User>
-                  <UserImage src='https://images.pexels.com/photos/9833110/pexels-photo-9833110.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'/>
+                  <UserImage src={data.user.profile_image.small}/>
                  <UserInfo>
-                    <Name>nilay</Name>
-                    <UserName>@nilay</UserName>
+                    <Name>{data.user.name}</Name>
+                    <UserName>{data.user.username}</UserName>
                 </UserInfo>
              </User>
              <Likes>
-                 <LikesCount>2.3k</LikesCount>
+                 <LikesCount>{data.likes}</LikesCount>
                  <ThumbUpIcon fontSize='medium'/>
              </Likes>
         </UserDetails>
         <ImageDesc>
-            <h1>description</h1>
-            <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab voluptatem nesciunt quaerat laudantium reprehenderit, magni a voluptates saepe sit est harum. Accusantium quasi numquam adipisci officiis, expedita possimus fuga voluptas!
-            </p>
-            <p>
-              24th March
-            </p>
+            <Desc>{data.description}</Desc>
+            <AltDesc>
+            {data.alt_description}
+            </AltDesc>
+            <UploadDate>
+              {new Date(data.created_at).toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'})}
+            </UploadDate>
         </ImageDesc>
         </Details>
     </Container>

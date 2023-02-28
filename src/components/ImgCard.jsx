@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 
 const Container = styled.div`
+cursor: pointer;
 height: auto;
 flex-direction: column;
 border: 1px solid lightgrey;
@@ -61,9 +62,9 @@ color:gray;
 `;
 
 
-const ImgCard = ({link,user,likes}) => {
+const ImgCard = ({link,user,likes,onClick}) => {
   return (
-    <Container>
+    <Container onClick={onClick}>
         <Image src={link}/>
         <Details>
              <User>
